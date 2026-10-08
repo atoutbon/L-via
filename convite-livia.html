@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TCC: salvação nacional</title>
+<style>
+:root{--bg:#faf8f5;--fg:#1d1b19;--mut:#7a746d;--ac:#b4442f;--ln:#d9d3cb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171513;--fg:#f1ede7;--mut:#9a938a;--ac:#e0735c;--ln:#36312c}}
+:root[data-theme="dark"]{--bg:#171513;--fg:#f1ede7;--mut:#9a938a;--ac:#e0735c;--ln:#36312c}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--fg);font-family:Georgia,'Times New Roman',serif;line-height:1.6;overflow-x:hidden}
+main{max-width:31rem;margin:0 auto;padding:8vh 1.5rem 4rem}
+.step{display:none}.step.on{display:block;animation:f .5s ease}
+@keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+.cap{text-align:center;color:var(--mut);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2rem}
+h1{font-size:1.65rem;font-weight:400;margin:0 0 1.2rem;line-height:1.25}
+h2{font-size:.78rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin:1.6rem 0 .3rem}
+p{margin:0 0 1rem}
+.mut{color:var(--mut);font-size:.9rem}
+.c{text-align:center}
+label{display:block;margin:1.6rem 0 .4rem}
+label span{display:block;color:var(--mut);font-size:.88rem}
+input,textarea{width:100%;font:inherit;color:var(--fg);background:none;border:0;border-bottom:1px solid var(--ln);padding:.5rem 0;border-radius:0;outline:none;resize:none}
+input:focus,textarea:focus{border-color:var(--ac)}
+button{font:inherit;cursor:pointer;background:none;color:var(--fg);border:1px solid var(--ln);padding:.8rem 1.1rem;border-radius:2px;margin:0 .5rem .6rem 0;transition:transform .25s ease,border-color .2s,color .2s}
+button:hover{border-color:var(--ac);color:var(--ac)}
+button.p{background:var(--ac);border-color:var(--ac);color:var(--bg)}
+button.p:hover{color:var(--bg);opacity:.88}
+.opts button{display:block;width:100%;text-align:left}
+.opts button.sel{border-color:var(--ac);color:var(--ac)}
+.row{margin-top:1.6rem;min-height:5.5rem}
+pre{white-space:pre-wrap;font:inherit;border-left:2px solid var(--ac);padding:.2rem 0 .2rem 1rem;margin:1.2rem 0}
+</style>
+</head>
+<body>
+<main>
+<section class="step on" id="s1">
+<div class="cap">Universidade Federal da Conversa Boa<br>Trabalho de Conclusão de Curso</div>
+<h1 class="c">Articulação para a redemocratização do afeto nacional: estudo de caso com a Lívia</h1>
+<p class="mut c">Autor: Bernades · Público-alvo: Lívia</p>
+<h2>Resumo</h2>
+<p>Este trabalho investiga se o Brasil pode ser salvo do bolsonarismo por meio de conversa boa, café e articulação política. Hipótese central: toda boa mudança começa com duas pessoas que discordam de muita coisa, menos do que importa.</p>
+<h2>Conflito de interesses</h2>
+<p>O autor declara achar o público-alvo muito inteligente e o sorriso dela, estatisticamente relevante.</p>
+<div class="row">
+<button class="p" onclick="go(2)">Participar da pesquisa</button>
+<button id="no" onmouseenter="dodge(false)" onclick="dodge(true)">Recusar</button>
+<p class="mut" id="h"></p>
+</div>
+</section>
+
+<section class="step" id="s2">
+<div class="cap">Capítulo 1 · Metodologia</div>
+<h1>Trabalho de campo: qual seria o programa do feriado?</h1>
+<p class="mut">O público-alvo escolhe. O autor entra com a companhia e as piadas.</p>
+<div class="opts" id="opts">
+<button onclick="pick(this,'café e livraria, com papo atravessado')">Café e livraria, com papo atravessado</button>
+<button onclick="pick(this,'pôr do sol com algo gostoso pra beliscar')">Pôr do sol com algo gostoso pra beliscar</button>
+<button onclick="pick(this,'cinema, show ou teatro')">Cinema, show ou teatro</button>
+<button onclick="pick(this,'uma ideia sua, e eu me deixo surpreender')">Ideia sua (me surpreenda)</button>
+</div>
+<button class="p" id="n2" style="display:none;margin-top:.8rem" onclick="go(3)">Próximo capítulo</button>
+</section>
+
+<section class="step" id="s3">
+<div class="cap">Capítulo 2 · Cronograma</div>
+<h1>Qual dia é melhor para o trabalho de campo?</h1>
+<p class="mut">Pesquisa séria respeita a agenda do público-alvo.</p>
+<div class="opts" id="days">
+<button onclick="pickd(this,'quinta')">Quinta</button>
+<button onclick="pickd(this,'sexta')">Sexta</button>
+<button onclick="pickd(this,'sábado')">Sábado</button>
+<button onclick="pickd(this,'domingo')">Domingo</button>
+</div>
+<button class="p" id="n3" style="display:none;margin-top:.8rem" onclick="done()">Concluir</button>
+</section>
+
+<section class="step" id="s4">
+<div class="cap">Considerações finais</div>
+<h1>Resultado: participação confirmada.</h1>
+<p>Copia o texto abaixo e me manda por aqui mesmo, para eu anexar ao trabalho. Em troca, o autor se compromete a manter as piadas dentro da cota prometida.</p>
+<pre id="g"></pre>
+<button class="p" id="cb" onclick="cp()">Copiar resposta</button>
+<button onclick="go(3)">Mudar o dia</button>
+</section>
+
+<section class="step" id="s5">
+<div class="cap">Resultado</div>
+<h1>Participação não confirmada.</h1>
+<p>Tudo bem, sério. A pesquisa fica arquivada com honra, o estudo segue em aberto e a conversa continua de pé, no ritmo que for bom para você.</p>
+<button onclick="go(1)">Reconsiderar</button>
+</section>
+</main>
+<script>
+var plan='',tries=0;
+function $(i){return document.getElementById(i)}
+function go(n){document.querySelectorAll('.step').forEach(function(e){e.classList.remove('on')});$('s'+n).classList.add('on');window.scrollTo(0,0)}
+function dodge(click){
+var b=$('no');
+if(tries>=5){if(click){go(5)}return}
+tries++;
+var x=Math.round((Math.random()*2-1)*70),y=Math.round((Math.random()*2-1)*45);
+b.style.transform='translate('+x+'px,'+y+'px)';
+$('h').textContent=['O botão pediu vista ao processo.','Ele foi à luta, mas por outro caminho.','Esse botão tem medo de compromisso e de banca.','Quase! Ele é rápido para quem nunca foi aprovado em concurso.','Última fuga, juro. Agora ele deixa você clicar.'][tries-1];
+}
+function pick(b,t){plan=t;document.querySelectorAll('#opts button').forEach(function(x){x.classList.remove('sel')});b.classList.add('sel');$('n2').style.display='inline-block'}
+var day='';
+function pickd(b,t){day=t;document.querySelectorAll('#days button').forEach(function(x){x.classList.remove('sel')});b.classList.add('sel');$('n3').style.display='inline-block'}
+function done(){
+var a=['Participo da pesquisa! Trabalho de campo no feriado: '+plan+'.','Melhor dia: '+day+'.','Referência: LÍVIA. Respostas ao questionário. 2026. Apêndice A do TCC do Bernades.'];
+$('g').textContent=a.join('\n');go(4)}
+function cp(){var t=$('g').textContent,c=$('cb');
+try{navigator.clipboard.writeText(t).then(function(){c.textContent='Copiado ✓'},function(){c.textContent='Selecione e copie o texto acima'})}catch(e){c.textContent='Selecione e copie o texto acima'}}
+</script>
+</body>
+</html>
